@@ -20,6 +20,10 @@ Plugin 'slashmili/alchemist.vim'
 Plugin 'elixir-editors/vim-elixir'
 Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'mhinz/vim-signify'
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 filetype plugin indent on
@@ -79,10 +83,20 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+let g:syntastic_elixir_checkers=['elixir']
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list=1
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq=0
+let g:syntastic_enable_elixir_checker=1
+
+"Gitgutter"
+hi clear SignColumn
+let g:airline#extenstions#hunks#enable=1
+
+"YouCompleteMe"
+let g:ycm_global_ycm_extra_conf="~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+
 
 "Theme"
 let g:gruvbox_italic=1
@@ -108,8 +122,6 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-L> <C-W><C-L>
-"Resizing"
-
 
 "Identation mapping"
 inoremap <TAB> <C-T>
@@ -118,9 +130,7 @@ vnoremap <TAB> >gv
 vnoremap <S-TAB> <gv
 
 "Tab navigation"
-nnoremap <C-t> <Esc>:tabnew<CR>
+nnoremap <C-t> :tabnew<CR>
 nnoremap <C-x> :tabclose<CR>
-nnoremap <C-S-tab> :tabprevious<CR>
-nnoremap <C-tab> :tabnext<CR>
 inoremap <C-t> :tabnew<CR>i
 
