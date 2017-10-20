@@ -12,7 +12,7 @@ Plugin 'morhetz/gruvbox'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'w0ng/vim-hybrid'
-Plugin 'Yggdroot/indentLine' 
+Plugin 'Yggdroot/indentLine'
 Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-syntastic/syntastic'
@@ -21,9 +21,11 @@ Plugin 'elixir-editors/vim-elixir'
 Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-endwise'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'mhinz/vim-signify'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'whatyouhide/vim-gotham'
 
 call vundle#end()
 filetype plugin indent on
@@ -37,6 +39,7 @@ map <Right> <Nop>
 "Leader key"
 let mapleader=","
 
+autocmd BufWritePre * :%s/\s\+$//e
 
 "Spaces and Tabs"
 
@@ -52,6 +55,7 @@ set number
 set showcmd
 set lazyredraw
 set ruler
+set cc=80
 
 "Searching"
 
@@ -103,7 +107,7 @@ let g:gruvbox_italic=1
 let g:grubvox_italicize_comments=1
 
 set background=dark
-colorscheme gruvbox 
+colorscheme gruvbox
 
 "Terminal color problem fix"
 
@@ -130,7 +134,7 @@ vnoremap <TAB> >gv
 vnoremap <S-TAB> <gv
 
 "Tab navigation"
-nnoremap <C-t> :tabnew<CR>
-nnoremap <C-x> :tabclose<CR>
+nnoremap <leader>t :tabnew<CR>
+nnoremap <leader>x :tabclose<CR>
 inoremap <C-t> :tabnew<CR>i
 
