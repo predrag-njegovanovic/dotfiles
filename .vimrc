@@ -26,6 +26,8 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'mhinz/vim-signify'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'whatyouhide/vim-gotham'
+Plugin 'kien/ctrlp.vim'
+Plugin 'thoughtbot/vim-rspec'
 
 call vundle#end()
 filetype plugin indent on
@@ -88,6 +90,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_elixir_checkers=['elixir']
+let g:syntastic_ruby_checkers=['rubocop']
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list=1
 let g:syntastic_check_on_open=1
@@ -101,8 +104,15 @@ let g:airline#extenstions#hunks#enable=1
 "YouCompleteMe"
 let g:ycm_global_ycm_extra_conf="~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
 
+"CtrlP"
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_mod = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
 
-"Theme"
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)|deps|_build|vendor|node_modules$'
+
+"heme"
 let g:gruvbox_italic=1
 let g:grubvox_italicize_comments=1
 
@@ -138,3 +148,6 @@ nnoremap <leader>t :tabnew<CR>
 nnoremap <leader>x :tabclose<CR>
 inoremap <C-t> :tabnew<CR>i
 
+"RSpec binding"
+map <leader>rt :call RunCurrentSpecFile()<CR>
+map <leader>ra :call RunAllSpecs()<CR>
