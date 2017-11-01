@@ -28,6 +28,8 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'whatyouhide/vim-gotham'
 Plugin 'kien/ctrlp.vim'
 Plugin 'thoughtbot/vim-rspec'
+Plugin 'pangloss/vim-javascript'
+Plugin 'ajh17/Spacegray.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -77,7 +79,7 @@ set smartindent
 set cindent
 
 "Airline"
-let g:airline_theme="gruvbox"
+"let g:airline_theme="spacegray"
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 
@@ -89,6 +91,7 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+let g:syntastic_javascript_checkers=['jshint']
 let g:syntastic_elixir_checkers=['elixir']
 let g:syntastic_ruby_checkers=['rubocop']
 let g:syntastic_always_populate_loc_list=1
@@ -112,12 +115,16 @@ let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)|deps|_build|vendor|node_modules$'
 
-"heme"
+"vim-javascript"
+let g:javascript_plugin_flow=1
+
+
+"theme"
 let g:gruvbox_italic=1
 let g:grubvox_italicize_comments=1
 
-set background=dark
-colorscheme gruvbox
+"set background=dark"
+colorscheme spacegray
 
 "Terminal color problem fix"
 
