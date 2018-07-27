@@ -16,16 +16,12 @@ POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="↱"
 POWERLEVEL9K_ALWAYS_SHOW_USER=true
 DEFAULT_USER=$USERNAME
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vi_mode load ram_joined battery os_icon time)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(virtualenv status load ram_joined battery os_icon time)
 POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S \uf073 %d.%m.%y}"
 POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND='blue'
-POWERLEVEL9K_VI_MODE_INSERT_BACKGROUND='blue'
-POWERLEVEL9K_VI_MODE_INSERT_FOREGROUND='black'
-POWERLEVEL9K_VI_MODE_NORMAL_BACKGROUND='green'
-POWERLEVEL9K_VI_MODE_NORMAL_FOREGROUND='black'
 POWERLEVEL9K_TIME_BACKGROUND="cyan"
 POWERLEVEL9K_TIME_FOREGROUND="black"
-POWERLEVEL9K_BATTERY_STAGES=("\uf261")
+POWERLEVEL9K_BATTERY_ICON='\uf1e6'
 
 if [[ -r /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh ]]; then
     source /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh
@@ -45,12 +41,27 @@ export LANG=en_US.UTF-8
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
+# CUDA
+export PATH=/home/predrag/cuda-9.2/bin${PATH:+:${PATH}}
+export PATH=/home/predrag/torch/install/bin$PATH
+export TORCH_NVCC_FLAGS="-D__CUDA_NO_HALF_OPERATIONS__"
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/home/predrag/cuda-9.2/lib64
+
+# VirtualEnv
+
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export WORKON_HOME=$HOME/.virtulenvs
+export PROJECT_HOME=$HOME/Code
+
+source /usr/local/bin/virtualenvwrapper.sh
+
 alias zshconfig="vim ~/.zshrc"
 alias vimconfig="vim ~/.vimrc"
 
+# . /home/predrag/torch/install/bin/torch-activate
+
 alias code="cd $HOME/Code"
-alias pycharm="cd $HOME/PyCharm/bin/"
 
-fortune | cowsay
+# fortune | cowsay
 
-source /home/predrag/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /home/predrag/Code/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
