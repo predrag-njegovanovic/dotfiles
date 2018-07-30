@@ -30,6 +30,7 @@ Plugin 'python-mode/python-mode'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'elzr/vim-json'
 Plugin 'othree/jspc.vim'
+Plugin 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 
 call vundle#end()
 filetype plugin indent on
@@ -45,6 +46,8 @@ let mapleader=","
 
 autocmd BufWritePre * :%s/\s\+$//e
 set backspace=indent,eol,start
+
+set completeopt-=preview
 
 " Spaces and Tabs
 syntax enable
@@ -75,25 +78,25 @@ set smartindent
 set cindent
 
 " Airline
-let g:airline_theme="gruvbox"
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#ale#enabled=1
+let g:airline_theme = "gruvbox"
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#ale#enabled = 1
 
 " Vim-indent
-let g:indentLines_setColors=0
+let g:indentLines_setColors = 0
 
 " Gitgutter
 hi clear SignColumn
-let g:airline#extenstions#hunks#enable=1
+let g:airline#extenstions#hunks#enable = 1
 
 " Ale
-let g:ale_fix_on_enter=0
-let g:ale_fix_on_save=1
-let g:ale_sign_error='⇒ '
-let g:ale_sign_warning='↯ '
-let g:ale_lint_on_text_changed='never'
-let g:ale_lint_on_save=1
+let g:ale_fix_on_enter = 0
+let g:ale_fix_on_save = 1
+let g:ale_sign_error = '⇒ '
+let g:ale_sign_warning = '↯ '
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_save = 1
 
 " Ale Python
 let g:ale_linters = { 'python': ['flake8'] }
@@ -104,24 +107,28 @@ let g:ale_linters = { 'javascript': ['eslint'] }
 let g:ale_fixers  = { 'javascript': ['prettier', 'eslint'] }
 
 " JavaScript
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+let g:ycm_min_num_of_chars_for_completion = 4
+let g:ycm_min_num_identifier_candidate_chars = 4
+let g:ycm_enable_diagnostic_highlighting = 0
+
+let g:ycm_add_preview_to_completeopt = 0
 
 " python-mode
 let g:pymode_python='python3'
-let g:pymode_trim_whitespaces=1
-let g:pymode_options_max_line_length=80
-let g:pymode_lint=0
-let g:pymode_lint_on_write=0
-let g:pymode_indent=0
-let g:pymode_folding=0
+let g:pymode_trim_whitespaces = 1
+let g:pymode_options_max_line_length = 80
+let g:pymode_lint = 0
+let g:pymode_lint_on_write = 0
+let g:pymode_indent = 0
+let g:pymode_folding = 0
 
-let g:pymode_run=1
+let g:pymode_run = 1
 let g:pymode_run_bind='<leader>p'
 
-let g:pymode_rope_completion=1
-let g:pymode_rope_complete_on_dot=0
-let g:pymode_rope_completion_bind='<C-Space>'
-let g:pymode_syntax=1
+let g:pymode_rope_completion = 1
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_rope_completion_bind = '<C-Space>'
+let g:pymode_syntax = 1
 
 " Close preview window after completion
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
@@ -135,9 +142,9 @@ let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)|deps|_build|vendor|node_modules$'
 
-let g:gruvbox_italic=1
-let g:grubvox_italicize_comments=1
-let g:hybrid_custom_term_colors=1
+let g:gruvbox_italic = 1
+let g:grubvox_italicize_comments = 1
+let g:hybrid_custom_term_colors = 1
 
 set background=dark
 set termguicolors
