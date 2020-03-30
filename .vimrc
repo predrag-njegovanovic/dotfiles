@@ -27,10 +27,16 @@ Plugin 'mhinz/vim-signify'
 Plugin 'kien/ctrlp.vim'
 Plugin 'w0rp/ale'
 Plugin 'python-mode/python-mode'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'jelera/vim-javascript-syntax'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'Quramy/tsuquyomi'
+Plugin 'Quramy/vim-js-pretty-template'
 Plugin 'elzr/vim-json'
 Plugin 'othree/jspc.vim'
-Plugin 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+Plugin 'hdima/python-syntax'
+Plugin 'ambv/black'
+Plugin 'chrisbra/csv.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -44,8 +50,14 @@ map <Right> <Nop>
 " Leader key
 let mapleader=","
 
+let python_highlight_all = 1
+
 autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufWritePre *.py execute ':Black'
 set backspace=indent,eol,start
+
+" Set yank to clipboard
+set clipboard=unnamedplus
 
 set completeopt-=preview
 
@@ -61,7 +73,7 @@ set number
 set showcmd
 set lazyredraw
 set ruler
-set cc=80
+set cc=90
 
 " Searching
 set incsearch
@@ -77,11 +89,20 @@ set autoindent
 set smartindent
 set cindent
 
+" Black
+let g:black_virtualenv = "~/.virtualenvs/black"
+
 " Airline
-let g:airline_theme = "gruvbox"
+let g:airline_theme = "base16"
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#show_buffer=0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
+
+" Gruvbox
+let g:gruvbox_dark_contrast = 'hard'
+let g:gruvbox_improved_strings = 0
+let g:gruvbox_improved_warnings = 1
 
 " Vim-indent
 let g:indentLines_setColors = 0
@@ -98,25 +119,26 @@ let g:ale_sign_warning = '↯ '
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 1
 
+" Ale fixers
+let g:ale_fixers  = {
+      \'javascript': ['prettier', 'eslint']
+          \}
+
 " Ale Python
+let g:ale_python_flake8_use_global = 1
 let g:ale_linters = { 'python': ['flake8'] }
-let g:ale_fixers  = { 'python': ['autopep8'] }
 
 " Ale JavaScript
+let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_linters = { 'javascript': ['eslint'] }
-let g:ale_fixers  = { 'javascript': ['prettier', 'eslint'] }
-
-" JavaScript
-let g:ycm_min_num_of_chars_for_completion = 4
-let g:ycm_min_num_identifier_candidate_chars = 4
-let g:ycm_enable_diagnostic_highlighting = 0
-
-let g:ycm_add_preview_to_completeopt = 0
 
 " python-mode
+let g:pymode_virtualenv = 1
+let g:pymode_init = 0
 let g:pymode_python='python3'
 let g:pymode_trim_whitespaces = 1
-let g:pymode_options_max_line_length = 80
+let g:pymode_options_max_line_length = 90
+let g:pymode_syntax_space_errors = 0
 let g:pymode_lint = 0
 let g:pymode_lint_on_write = 0
 let g:pymode_indent = 0
@@ -125,10 +147,14 @@ let g:pymode_folding = 0
 let g:pymode_run = 1
 let g:pymode_run_bind='<leader>p'
 
-let g:pymode_rope_completion = 1
-let g:pymode_rope_complete_on_dot = 0
-let g:pymode_rope_completion_bind = '<C-Space>'
+let g:pymode_breakpoint = 1
+let g:pymode_breakpoint_bind = '<leader>b'
+
+let g:pymode_rope = 0
 let g:pymode_syntax = 1
+
+" SuperTab
+let g:SuperTabDefaultCompletionType = "<tab>"
 
 " Close preview window after completion
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
@@ -152,6 +178,8 @@ colorscheme gruvbox
 
 " Nerd tree setup
 map <F2> :NERDTreeToggle<CR>
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
 " Split windows mapping
 nnoremap <leader>v :vsplit<CR>

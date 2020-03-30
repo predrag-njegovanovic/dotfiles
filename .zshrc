@@ -27,7 +27,7 @@ if [[ -r /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline
     source /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh
 fi
 
-plugins=(git sudo zsh-syntax-highlighting)
+plugins=(git sudo docker docker-compose zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -42,15 +42,31 @@ export LANG=en_US.UTF-8
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # CUDA
-export PATH=/home/predrag/cuda-9.2/bin${PATH:+:${PATH}}
+export PATH=/home/predrag/cuda-9.0/bin${PATH:+:${PATH}}
 export PATH=/home/predrag/torch/install/bin$PATH
 export TORCH_NVCC_FLAGS="-D__CUDA_NO_HALF_OPERATIONS__"
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/home/predrag/cuda-9.2/lib64
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/home/predrag/cuda-9.0/lib64
 
-# VirtualEnv
+# Java
+export JAVA_HOME=/usr/lib/jvm/zulu-12-amd64/
 
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-export WORKON_HOME=$HOME/.virtulenvs
+# Python
+export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python3.6/dist-packages/
+
+#Bazel
+export PATH="$PATH:$HOME/bin"
+
+#
+export INSTALL4J_JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+
+# Airflow
+export AIRFLOW_GPL_UNIDECODE=yes
+
+# GCP
+export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.6
+export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Code
 
 source /usr/local/bin/virtualenvwrapper.sh
@@ -60,6 +76,10 @@ alias vimconfig="vim ~/.vimrc"
 
 # . /home/predrag/torch/install/bin/torch-activate
 
+# Python 3.6
+alias python=/usr/bin/python3.6
+
+# Dev directory
 alias code="cd $HOME/Code"
 
 # fortune | cowsay
