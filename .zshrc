@@ -23,12 +23,10 @@ POWERLEVEL9K_TIME_BACKGROUND="cyan"
 POWERLEVEL9K_TIME_FOREGROUND="black"
 POWERLEVEL9K_BATTERY_ICON='\uf1e6'
 
-if [[ -r /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh ]]; then
-    source /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh
+if [[ -r /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh ]]; then source /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh
 fi
 
 plugins=(git sudo docker docker-compose zsh-autosuggestions)
-
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -38,25 +36,40 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
+# Content parser config
+export INPUT_FILE_PATH=/home/predrag/Code/nano-new-data/
+export OUTPUT_FILE_PATH=/home/predrag/Desktop/dataset.txt
+export ERROR_FILE_PATH=/home/predrag/Desktop/failed_urls.txt
+
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-# CUDA
-export PATH=/home/predrag/cuda-9.0/bin${PATH:+:${PATH}}
-export PATH=/home/predrag/torch/install/bin$PATH
-export TORCH_NVCC_FLAGS="-D__CUDA_NO_HALF_OPERATIONS__"
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/home/predrag/cuda-9.0/lib64
+# default AWS profile
+export AWS_PROFILE=predrag
 
 # Java
-export JAVA_HOME=/usr/lib/jvm/zulu-12-amd64/
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
 # Python
-export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python3.6/dist-packages/
+export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python3.8/dist-packages/
 
-#Bazel
+# Bazel
 export PATH="$PATH:$HOME/bin"
 
-#
+# Poetry
+export PATH="$HOME/.poetry/bin:$PATH"
+
+#Druid
+export DRUID_SKIP_JAVA_CHECK=1
+export DRUID_HOSTS=localhost
+
+#NodeJS
+export NODEJS_HOME=/usr/local/lib/node/nodejs
+export PATH="$NODEJS_HOME/bin:$PATH"
+
+#MLFlow server
+export MLFLOW_TRACKING_URI=http://192.168.10.24:5000
+
 export INSTALL4J_JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
 
 # Airflow
@@ -65,19 +78,19 @@ export AIRFLOW_GPL_UNIDECODE=yes
 # GCP
 export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
 
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.6
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.8
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Code
 
-source /usr/local/bin/virtualenvwrapper.sh
+source ~/.local/bin/virtualenvwrapper.sh
 
 alias zshconfig="vim ~/.zshrc"
 alias vimconfig="vim ~/.vimrc"
 
 # . /home/predrag/torch/install/bin/torch-activate
 
-# Python 3.6
-alias python=/usr/bin/python3.6
+# Python 3.8
+# alias python=/usr/bin/python3.8
 
 # Dev directory
 alias code="cd $HOME/Code"

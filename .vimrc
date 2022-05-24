@@ -35,7 +35,7 @@ Plugin 'Quramy/vim-js-pretty-template'
 Plugin 'elzr/vim-json'
 Plugin 'othree/jspc.vim'
 Plugin 'hdima/python-syntax'
-Plugin 'ambv/black'
+" Plugin 'ambv/black'
 Plugin 'chrisbra/csv.vim'
 
 call vundle#end()
